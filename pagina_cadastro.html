@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro</title>
+    <link rel="stylesheet" type="text/css" href="css/cadastro_style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="container-cadastro">
+            <div class="wrap-cadastro">
+                <form class="cadastro-form">
+                    <span class="cadastro-form-title">
+                        Inicie seu cadastro
+                    </span>
+
+                    <div class="wrap-input margin-top-35 margin-bottom-35">
+                        <input class="input-form" type="text" name="nome" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Nome"></span>
+                    </div>
+
+                    <div class="wrap-input margin-bottom-35">
+                        <input class="input-form" type="text" name="email" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="E-mail"></span>
+                    </div>
+
+                    <div class="wrap-input margin-top-35 margin-bottom-35">
+                        <input class="input-form" type="text" name="cargo" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Cargo"></span>
+                    </div>
+
+                    <div class="wrap-input margin-top-35 margin-bottom-35">
+                        <input class="input-form" type="password" name="password">
+                        <span class="focus-input-form" data-placeholder="Senha"></span>
+                    </div>
+
+                    <div class="container-cadastro-form-btn">
+                        <input type="submit" class="cadastro-form-btn" value="Cadastrar"></input>
+                    </div>
+                </form>
+            </div>
+            <img src="image/Thesis-amico.png" alt="Login" width="400" height="400" class="margin-left-50" />
+        </div>
+
+        <script>
+            let inputs = document.getElementsByClassName("input-form");
+            for (let input of inputs) {
+                input.addEventListener("blur", function () {
+                    if (input.value.trim() != "") {
+                        input.classList.add("has-val")
+                    } else {
+                        input.classList.remove("has-val")
+                    }
+                });
+            }
+        </script>
+</body>
+</html>
