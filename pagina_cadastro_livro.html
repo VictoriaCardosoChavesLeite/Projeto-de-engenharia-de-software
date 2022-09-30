@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br>
+<head>
+    <meta charset=" UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadastrar livro</title>
+<link rel="stylesheet" type="text/css" href="css/cadastro_livro_style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="container-livro">
+            <div class="wrap-livro">
+                <form class="livro-form">
+                    <span class="livro-form-title">
+                        Cadastre o livro
+                    </span>
+
+                    <div class="wrap-input margin-top-35 margin-bottom-35">
+                        <input class="input-form" type="text" name="titulo" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Título"></span>
+                    </div>
+
+                    <div class="wrap-input margin-bottom-35">
+                        <input class="input-form" type="text" name="autor" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Autor"></span>
+                    </div>
+
+                    <div class="wrap-input margin-top-35 margin-bottom-35">
+                        <input class="input-form" type="text" name="ano" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Ano de publicação"></span>
+                    </div>
+
+                    <div class="wrap-input margin-top-35 margin-bottom-35">
+                        <input class="input-form" type="text" name="code" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Código"></span>
+                    </div>
+
+                    <div class="container-livro-form-btn">
+                        <input type="submit" class="livro-form-btn" value="Cadastrar"></input>
+                    </div>
+                </form>
+            </div>
+            <img src="image/Thesis-amico.png" alt="Login" width="400" height="400" class="margin-left-50" />
+        </div>
+
+        <script>
+            let inputs = document.getElementsByClassName("input-form");
+            for (let input of inputs) {
+                input.addEventListener("blur", function () {
+                    if (input.value.trim() != "") {
+                        input.classList.add("has-val")
+                    } else {
+                        input.classList.remove("has-val")
+                    }
+                });
+            }
+        </script>
+</body>
+
+</html>

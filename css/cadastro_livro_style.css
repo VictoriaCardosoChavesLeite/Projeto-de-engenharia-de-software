@@ -9,7 +9,6 @@
     --highlighth-text: #333333;
     --input-text: #555555;
     --white-color: #FFFFFF;
-    --points-list: #CCCCCC;
     --line-input: #D9D9D9;
 }
 
@@ -67,6 +66,7 @@ button:hover{
    Utilitários
 */
 
+
 .margin-bottom-35 {
     margin-bottom: 35px;
 }
@@ -96,7 +96,7 @@ button:hover{
     margin: 0 auto;
 }
 
-.container-cadastro{
+.container-livro{
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -107,7 +107,7 @@ button:hover{
     background-color: var(--white-color);
 }
 
-.wrap-cadastro{
+.wrap-livro{
     width: 370px;
     margin-right: 50px;
     background-color: var(--white-color);
@@ -116,11 +116,11 @@ button:hover{
 /* 
    Formulário
 */
-.cadastro-form{
+.livro-form{
     width: 100%;
 }
 
-.cadastro-form-title{
+.livro-form-title{
     display: block;
     font-family: Poppins-Bold;
     font-size: 39px;
@@ -210,13 +210,13 @@ button:hover{
    Botão
 */
 
-.container-cadastro-form-btn{
+.container-livro-form-btn{
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.cadastro-form-btn{
+.livro-form-btn{
     font-family: Poppins-Medium;
     font-size: 16px;
     color: var(--white-color);
@@ -233,7 +233,6 @@ button:hover{
     transition: all 0.4s;
 }
 
-.login-form-btn:hover{
+.livro-form-btn:hover{
     background-color: var(--highlighth-text);
 }
-
