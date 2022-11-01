@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="container-login-form-btn">
-                        <input type="submit" class="login-form-btn" onclick="Login();" value="Login"></input>
+                        <input type="submit" class="login-form-btn" value="Login" name="login"></input>
                     </div>
 
                     <ul class="login-utils">
@@ -44,7 +44,7 @@
                     </ul>
                 </form>
             </div>
-            <img src="/image/login_image.png" alt="Login" width="400" height="400" class="margin-left-50" />
+            <img src="/static/image/login_image.png" alt="Login" width="400" height="400" class="margin-left-50" />
         </div>
     </div>
 

@@ -4,7 +4,7 @@
     <meta charset=" UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cadastrar livro</title>
-<link rel="stylesheet" type="text/css" href="css/cadastro_livro_style.css">
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/cadastro_livro_style.css')}}">
 </head>
 
 <body>
@@ -16,6 +16,12 @@
                     <span class="livro-form-title">
                         Cadastre o livro
                     </span>
+
+                    <div class="wrap-input margin-top-35 margin-bottom-35">
+                        <input class="input-form" type="text" name="codigo" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Código do livro"></span>
+                    </div>
+
 
                     <div class="wrap-input margin-top-35 margin-bottom-35">
                         <input class="input-form" type="text" name="titulo" autocomplete="off">
@@ -32,9 +38,19 @@
                         <span class="focus-input-form" data-placeholder="Ano de publicação"></span>
                     </div>
 
-                    <div class="wrap-input margin-top-35 margin-bottom-35">
-                        <input class="input-form" type="text" name="code" autocomplete="off">
-                        <span class="focus-input-form" data-placeholder="Código"></span>
+                    <div class="wrap-input margin-bottom-35">
+                        <input class="input-form" type="text" name="editora" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Editora"></span>
+                    </div>
+
+                    <div class="wrap-input margin-bottom-35">
+                        <input class="input-form" type="text" name="estoque" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Estoque disponível"></span>
+                    </div>
+
+                    <div class="wrap-input margin-bottom-35">
+                        <input class="input-form" type="text" name="assunto" autocomplete="off">
+                        <span class="focus-input-form" data-placeholder="Assunto do livro"></span>
                     </div>
 
                     <div class="container-livro-form-btn">
@@ -42,7 +58,7 @@
                     </div>
                 </form>
             </div>
-            <img src="image/Thesis-amico.png" alt="Login" width="400" height="400" class="margin-left-50" />
+            <img src="/static/image/Thesis-amico.png" alt="Login" width="400" height="400" class="margin-left-50" />
         </div>
 
         <script>

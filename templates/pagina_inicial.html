@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página inicial</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/pagina_inicial_style.css')}}">
+</head>
+
+<script>
+    function cadastrar() {
+        window.location.href = "http://www.devmedia.com.br";
+    }
+
+</script>
+
+<body>
+    <div class="container">
+
+        <div class="container-login">
+            <div class="wrap-login">
+                <form class="login-form">
+                    <span class="login-form-title">
+                        Seja bem-vindo(a)
+                    </span>
+
+                    <br></br>
+
+                    <div class="container-login-form-btn">
+                        <button class="login-form-btn" onclick="cadastrar()">Cadastrar livros</button>
+                    </div>
+                    <br></br>
+                    <div class="container-login-form-btn">
+                        <input type="submit" class="login-form-btn" value="Reservar" name="reserva"></input>
+                    </div>
+
+                </form>
+            </div>
+            <img src="/static/image/login_image.png" alt="Login" width="400" height="400" class="margin-left-50" />
+        </div>
+    </div>
+
+</body>
+
+</html>
