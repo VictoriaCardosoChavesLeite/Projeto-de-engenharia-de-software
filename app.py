@@ -1,35 +1,39 @@
 from contextlib import redirect_stderr
-from flask import Flask, request, render_template # Importa a biblioteca
+from flask import Flask, render_template, request, redirect, session, flash, url_for
+from cadastrar import cadastrar_aluno, cadastrar_funcionario, cadastrar_livro, cadastrar_reserva 
 from functions import *
 
 app = Flask(__name__) # Inicializa a aplicação
+app.secret_key = 'flask'
 
 @app.route('/')
 def login():
   email = request.args.get('email')
   senha = request.args.get('password')
-  checa_aluno = checar_login('Alunos',email,senha)
-  checa_func = checar_login('Funcionários',email,senha)
+  checa_aluno = login_usuario('Alunos',email,senha)
+  checa_func = login_usuario('Funcionarios',email,senha)
 
   if checa_aluno == True or checa_func == True:
-    return app.redirect("/pagina_inicial.html")
+    return render_template("/pagina_inicial.html")
+  else:
+    #caso as credenciais não sejam validadas, exibe mensagem de erro e redirecion para o login
+    flash('Acesso negado, digite novamente!')
 
-  
 
   return render_template("pagina_login.html")
 
 @app.route('/pagina_inicial.html')
 def inicial():
+  flash('Bem vindo!')
   return render_template("pagina_inicial.html")
 
 @app.route('/pagina_reserva_livro.html')
 def reservar():
-
   codigo = request.args.get('codigo')
-  email = request.args.get('email')
-
-  registrar_reserva(email,codigo)
-
+  matricula = request.args.get('email')
+  
+  cadastrar_reserva(matricula,codigo)
+  subtrair_item(codigo)
   return render_template("/pagina_reserva_livro.html")
 
 @app.route('/pagina_cadastro_livro.html')
@@ -42,29 +46,22 @@ def cadastro_livro():
   editora = request.args.get('editora')
   estoque = request.args.get('estoque')
 
-  cadastrar_livro(codigo,titulo, ano, assunto, autor, editora, estoque)
+  cadastrar_livro(codigo,titulo, assunto,ano, autor, editora, estoque)
   return render_template("pagina_cadastro_livro.html")
 
 @app.route('/pagina_cadastro.html') # Nova rota
 def cadastro():
-    database = list()
-
     matricula = request.args.get('matricula')
     nome = request.args.get('nome')
     email = request.args.get('email')
     senha = request.args.get('password')
     cargo = request.args.get('cargo')
 
-    database.append(nome)
-    database.append(email)
-    database.append(senha)
-    database.append(cargo)
-
     if(cargo == 'Aluno'):
-      cadastrar_aluno(database,matricula)
+      cadastrar_aluno(matricula,email,senha)
 
     elif(cargo == 'Funcionário'):
-      cadastrar_funcionario(database,matricula)
+      cadastrar_funcionario(matricula,nome)
 
 
     return  render_template("pagina_cadastro.html")

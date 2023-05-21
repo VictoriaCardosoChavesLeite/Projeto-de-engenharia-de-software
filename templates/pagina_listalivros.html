@@ -1,0 +1,54 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <button onclick="listaTabela()">Gerar tabela</button>
+    </div>
+    <div class="tabcontainer">
+        <table border="1">
+            <thead>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Editora</th>
+                <th>Estoque</th>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    const jsonData = jQuery.('database.json');
+    console.log(jsonData);
+
+    function listaTabela() {
+        let tbody = document.getElementById("tbody");
+        tbody.innerText = '';
+
+        for (let i = 0; i < jsonData.Livros.length; i++) {
+            let tr = tbody.insertRow();
+
+            let td_Titulo = tr.insertCell();
+            let td_Autor = tr.insertCell();
+            let td_Editora = tr.insertCell();
+            let td_Estoque = tr.insertCell();
+
+            td_Titulo.innerText = jsonData.Livros[i].Titulo;
+            td_Autor.innerText = jsonData.Livros[i].Autor;
+            td_Editora.innerText = jsonData.Livros[i].Editora;
+            td_Estoque.innerText = jsonData.Livros[i].Estoque;
+
+        }
+
+        return td_Titulo, td_Autor, td_Editora, td_Estoque;
+    }
+</script>
+
+</html>

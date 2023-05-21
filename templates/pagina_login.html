@@ -10,7 +10,6 @@
 
 <body>
     <div class="container">
-
         <div class="container-login">
             <div class="wrap-login">
                 <form class="login-form">
@@ -20,7 +19,7 @@
 
                     <div class="wrap-input margin-top-35 margin-bottom-35">
                         <input class="input-form" type="text" name="email" autocomplete="off">
-                        <span class="focus-input-form" data-placeholder="E-mail"></span>
+                        <span class="focus-input-form" data-placeholder="Matrícula"></span>
                     </div>
 
                     <div class="wrap-input margin-bottom-35">
@@ -29,7 +28,7 @@
                     </div>
 
                     <div class="container-login-form-btn">
-                        <input type="submit" class="login-form-btn" value="Login" name="login"></input>
+                        <input type="submit" onclick="alerta()" class="login-form-btn" value="Login" name="login"></input>
                     </div>
 
                     <ul class="login-utils">
@@ -60,7 +59,9 @@
             });
         }
 
-
+        function alerta(){
+            alert('Bem vindo!')
+        }
     </script>
 
 </body>

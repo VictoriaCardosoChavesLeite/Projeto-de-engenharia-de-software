@@ -1,0 +1,18 @@
+{
+    "Funcionarios": [],
+    "Alunos": [
+        {
+            "Matricula": "1211131057",
+            "Senha": "b'gAAAAABjYDUAdEZCxxOSIDJ4y0VsNV-KZXeaiyq8qvC310kD8WOuIxtDFVj9opryu8gFClcgfSMFrJE5s1uFm1BqWI-zZm-4Yw=='"
+        },
+        {
+            "Matricula": "1211109515",
+            "Senha": "b'gAAAAABjYRRK1YcsFqBjJNwqwYdK_-SjGPoV8wOvYtxoeLZrnVFOwn0lCjh3dUchc7TtskmTOGYlTbNjx5xxpHa7L7-4jKDsyA=='"
+        },
+        {
+            "Matricula": "786413135",
+            "Senha": "b'gAAAAABkZqp1QqgA761G1OjiOnMIcDq-jTc5bD1b-YRPvSO0yW1xAhA3SPnJerrc4EMvGpNrai4PvXheQzckAEIfkUDRPiWP3A=='"
+        }
+    ],
+    "Key": "b'ezSAcqhmXMKzOFDq16bdRAfDGMFtjsAK7PCocJauJnw='"
+}

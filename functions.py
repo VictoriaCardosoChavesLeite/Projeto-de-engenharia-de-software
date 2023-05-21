@@ -1,119 +1,92 @@
-from datetime import datetime, timedelta
-#import yagmail
-import pandas as pd
+import json
 import string
-import random
+from cryptography.fernet import Fernet
 
 
-def checar_estoque(code, qtd):
-    data = pd.read_excel("database.xlsx", index_col=0, sheet_name="Livros")
-
-    for i in range(len(data.columns)):
-
-        if i == len(data.columns):
-            break
-
-        if code in list(data[i]):
-
-            if data[i][5] < qtd:
-                print("[!] A quantidade excede o estoque do produto")
-                return False
-
-            else:
-                return True
+def armazenar_dados(data, arquivo):
+    with open("{}.json".format(arquivo), "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
 
 
-def checar_dados(workbook, entrada):
-    data = pd.read_excel("database.xlsx", index_col=0, sheet_name=workbook)
+def ler_dados(arquivo):
+    with open("{}.json".format(arquivo), "r") as f:
+        data = json.load(f)
+        return data
 
-    counter = 0
 
-    for i in range(len(data.columns)):
+def inicializar_database():
+    data = {
+        "Funcionarios": [],
+        "Alunos": [],
+        "Livros": [],
+        "Reservas": []
+    }
+    armazenar_dados(data, "database")
 
-        if i == len(data.columns):
-            break
 
-        if entrada in list(data[i]):
-            counter += 1
+def inicializar_dewey():
+    data = {
+        "Codigos":
+            {
+                "000": "Ciências Computacionais e da Informação",
+                "100": "Filosofia e Psicologia",
+                "200": "Religião",
+                "300": "Ciências Sociais",
+                "400": "Linguagem",
+                "500": "Ciência",
+                "600": "Tecnologia",
+                "700": "Artes e Lazer",
+                "800": "Literatura",
+                "900": "História e Geografia"
+            }
+    }
+
+    armazenar_dados(data, "dewey")
+
+
+def inicializar_login():
+    key = Fernet.generate_key()
+
+    data = {
+        "Funcionarios": [],
+        "Alunos": [],
+        "Key": str(key)
+    }
+
+    armazenar_dados(data, "login")
+
+
+def checar_dado(tipo, dado, arquivo):
+    data = ler_dados(arquivo)[tipo]
+    for i in range(len(data)):
+        if dado in data[i].values():
             return True
 
-    if counter == 0:
-        return False
+    return False
 
-def checar_login(workbook, email,senha):
-    data = pd.read_excel("database.xlsx", index_col=0, sheet_name=workbook)
 
+def recuperar_indice(tipo, dado, arquivo):
     counter = 0
 
-    for i in range(len(data.columns)):
-
-        if i == len(data.columns):
-            break
-
-        if email and senha in list(data[i]):
+    data = ler_dados(arquivo)[tipo]
+    for i in range(len(data)):
+        if dado in data[i].values():
+            return counter
+        else:
             counter += 1
-            return True
-
-    if counter == 0:
-        return False
-
-def subtrair_item(dic):
-    data = pd.read_excel("database.xlsx", index_col=0, sheet_name="Livros")
-
-    for i in range(len(dic)):
-
-        for j in range(len(data.columns)):
-
-            if j == len(data.columns):
-                break
-
-            if list(dic.keys())[i] in list(data[j]):
-                data[j][5] = data[j][5] - dic[list(dic.keys())[0]]
-
-    with pd.ExcelWriter("database.xlsx", mode="a", engine="openpyxl", if_sheet_exists="replace") as writer:
-
-        data.to_excel(writer, sheet_name="Livros")
 
 
-def writeto_excel(workbook, dados):
-    data = pd.read_excel("database.xlsx", engine="openpyxl", index_col=0, sheet_name=workbook)
+def advertir_usuario(caso):
+    if caso == 2:
+        print("[!] Senha incorreta")
+        print("\n")
+    if caso == 1:
+        print("[!] A entrada já consta no sistema")
+        print("\n")
+    if caso == 0:
+        print("[!] A entrada não consta no sistema")
+        print("\n")
 
-    if len(data.columns) == 0:
-
-        data[0] = dados
-
-    else:
-
-        data[data.columns[-1] + 1] = dados
-
-    with pd.ExcelWriter("database.xlsx", mode="a", engine="openpyxl", if_sheet_exists="replace") as writer:
-
-        data.to_excel(writer, sheet_name=workbook)
-
-
-def cadastrar_funcionario(lista,matricula):
-
-    info = lista
-
-    check = checar_dados("Funcionários", matricula)
-
-    if check:
-        print("Elemento já cadastrado\n")
-        return
-
-    writeto_excel("Funcionários", info)
-
-
-def cadastrar_aluno(lista,matricula):
-    info = lista
-
-    check = checar_dados("Alunos", matricula)
-
-    if check:
-        print("Elemento já cadastrado\n")
-        return
-
-    writeto_excel("Alunos", info)
 
 def gerar_numeracao(assunto, autor, titulo):
     listaNumeros = []
@@ -121,98 +94,83 @@ def gerar_numeracao(assunto, autor, titulo):
     def converter_letras():
 
         for i in range(3):
-
             if i == 0:
-
                 numero = str(string.ascii_uppercase.index(autor[i]))
-
             else:
-
                 numero = str(string.ascii_lowercase.index(autor[i]))
 
             listaNumeros.append(numero)
 
-        numerosString = "".join(listaNumeros)
+            numString = "".join(listaNumeros)
 
-        return numerosString
+            return numString
 
-    return assunto + autor[0] + converter_letras() + titulo[0].lower()
+    livroID = assunto + autor[0] + converter_letras() + titulo[0].lower()
+
+    return livroID
+
 
 def gerar_assunto(assunto):
-    dewey = {
-        "000": "Ciências Computacionais e da Informação",
-        "100": "Filosofia e Psicologia",
-        "200": "Religião",
-        "300": "Ciências Sociais",
-        "400": "Linguagem",
-        "500": "Ciência",
-        "600": "Tecnologia",
-        "700": "Artes e Lazer",
-        "800": "Literatura",
-        "900": "História e Geografia",
-    }
+    with open("dewey.json", "r") as f:
+        data = json.load(f)
 
-    return dewey[assunto]
-
-def cadastrar_livro(codigo,titulo, ano, assunto, autor, editora, estoque):
-    #codigo = gerar_numeracao(assunto, autor, titulo)
-
-    #codigo = gerar_numeracao(assunto, autor, titulo)
-
-    info = [codigo, titulo, ano,assunto, autor, editora, estoque]
-
-    check = checar_dados("Livros", codigo)
-
-    if check:
-        print("Elemento já cadastrado\n")
-        return
-
-    writeto_excel("Livros", info)
+    return data["Codigos"][assunto]
 
 
-def registrar_reserva(email,codigoLivro):
+def encrypt_decrypt_senha(senha, caso):
+    data = ler_dados("login")
+    key = eval(data["Key"])
 
-    dicItem = {}
+    crypter = Fernet(key)
 
-    #check = checar_dados("Livros", codigoLivro)
-
-    #if check == False:
-    #    print("[!] A entrada não consta no banco de dados")
-    #    return
-
-    #check = checar_estoque(codigoLivro, 1)
-
-    #if not check:
-    #    return
-
-    #dicItem[codigoLivro] = 1
-
-    codigoReserva = "%016x" % random.getrandbits(64)
-
-    dataLimite = datetime.today() + timedelta(7)
-    dataLimite = datetime.strftime(dataLimite, "%d/%m/%y")
-
-    devolvido = 0
-
-    info = [codigoReserva, email, dataLimite, str(dicItem), devolvido]
-
-    writeto_excel("Reservas", info)
-
-    subtrair_item(dicItem)
+    if caso == 1:
+        senhaEncriptada = crypter.encrypt(senha)
+        return senhaEncriptada
+    if caso == 2:
+        senhaDecriptada = crypter.decrypt(senha)
+        return senhaDecriptada
 
 
-def comunicar_aluno(email):
-    user = 'engenhariadesoftwareprojeto@gmail.com'
-    app_password = 'kkurogbllninuxxb'
-    to = email
+def login_usuario(area,matricula,senha):
+    matriculaUsuario = matricula
+    if not checar_dado(area, matriculaUsuario, "login"):
+        advertir_usuario(0)
+        return False
 
-    subject = 'Lembrete - Devolução de Livro Emprestado'
-    content = ['Caro (a) aluno (a). Esta mensagem tem como objetivo comunicar que o'
-               ' seu empréstimo da obra está próximo de vencer. Evite multas, devolvendo o recurso '
-               ' à biblioteca assim que possível.']
+    data = ler_dados("login")
 
-    #with yagmail.SMTP(user, app_password) as yag:
-        #yag.send(to, subject, content)
-        #print("Aluno comunicado com sucesso")
+    senhaUsuario = senha.encode()
+    senhaArquivo = data["{}".format(area)][recuperar_indice("{}".format(area), matriculaUsuario, "login")]["Senha"]
+    senhaArquivo = encrypt_decrypt_senha(eval(senhaArquivo), 2)
 
-#def verificar_atraso():
+    if senhaUsuario != senhaArquivo:
+        advertir_usuario(2)
+        return False
+
+    return True
+
+def criar_admin():
+    data = ler_dados("login")
+
+    usuarioAdmin = "admin"
+    senhaAdmin = "senhaadmin"
+    dadosAdmin = {"Matricula": usuarioAdmin, "Senha": str(encrypt_decrypt_senha(senhaAdmin.encode(), 1))}
+
+    data["Funcionarios"].append(dadosAdmin)
+    armazenar_dados(data, "login")
+
+def subtrair_item(codigo):
+    data = ler_dados("database")
+
+    for i in range(len(data["Livros"])):
+        if int(data["Livros"][i]["ID"]) == codigo:
+            if data["Livros"][i]["Estoque"] <= 0:
+                advertir_usuario(3)
+                return False
+            else:
+
+                estoque = data["Livros"][i]["Estoque"]
+                estoque -= 1
+                data["Livros"]["Estoque"][i] = estoque
+                armazenar_dados(data, "database")
+                return True

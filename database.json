@@ -1,0 +1,34 @@
+{
+    "Funcionarios": [
+        {
+            "Matricula": "12144",
+            "Nome": "Gustavo"
+        }
+    ],
+    "Alunos": [
+        {
+            "Matricula": "1211131057",
+            "Email": "jefferson.fonseca@souunit.com.br"
+        },
+        {
+            "Matricula": "1211109515",
+            "Email": "teste@hotmail.com"
+        },
+        {
+            "Matricula": "786413135",
+            "Email": "teste5@gmail.com"
+        }
+    ],
+    "Livros": [
+        {
+            "ID": "3",
+            "Titulo": "Teste",
+            "Assunto": "Fico",
+            "Ano": "2022",
+            "Autor": "Teste",
+            "Editora": "Teste",
+            "Estoque": 10
+        }
+    ],
+    "Reservas": []
+}

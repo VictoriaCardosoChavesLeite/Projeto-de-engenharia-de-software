@@ -1,0 +1,14 @@
+{
+    "Codigos": {
+        "000": "Ciências Computacionais e da Informação",
+        "100": "Filosofia e Psicologia",
+        "200": "Religião",
+        "300": "Ciências Sociais",
+        "400": "Linguagem",
+        "500": "Ciência",
+        "600": "Tecnologia",
+        "700": "Artes e Lazer",
+        "800": "Literatura",
+        "900": "História e Geografia"
+    }
+}

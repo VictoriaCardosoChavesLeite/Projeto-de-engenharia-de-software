@@ -44,7 +44,7 @@
 
 
                     <div class="container-cadastro-form-btn">
-                        <input type="submit" class="cadastro-form-btn" value="Cadastrar"></input>
+                        <input type="submit" onclick="alerta()" class="cadastro-form-btn" value="Cadastrar"></input>
                     </div>
                 </form>
             </div>
@@ -61,6 +61,10 @@
                         input.classList.remove("has-val")
                     }
                 });
+            }
+
+            function alerta(){
+                alert('Cadastro feito com sucesso')
             }
         </script>
 </body>

@@ -8,13 +8,6 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/pagina_inicial_style.css')}}">
 </head>
 
-<script>
-    function cadastrar() {
-        window.location.href = "http://www.devmedia.com.br";
-    }
-
-</script>
-
 <body>
     <div class="container">
 
@@ -28,11 +21,21 @@
                     <br></br>
 
                     <div class="container-login-form-btn">
-                        <button class="login-form-btn" onclick="cadastrar()">Cadastrar livros</button>
+                        <a href="pagina_cadastro_livro.html" class="login-form-btn">
+                            Cadastrar livros
+                        </a>
                     </div>
                     <br></br>
                     <div class="container-login-form-btn">
-                        <input type="submit" class="login-form-btn" value="Reservar" name="reserva"></input>
+                        <a href="pagina_reserva_livro.html" class="login-form-btn">
+                            Reservar
+                        </a>
+                    </div>
+                    <br></br>
+                    <div class="container-login-form-btn">
+                        <a href="pagina_cadastro.html" class="login-form-btn">
+                            Ver livros cadastrados
+                        </a>
                     </div>
 
                 </form>
